@@ -1,0 +1,10 @@
+.board {
+  display: grid;
+  grid-template: repeat(3, 1fr) / repeat(3, 1fr);
+  width: 90px;
+  margin: 0 auto;
+  padding-bottom: 15px;
+  @media screen and (max-width: 767px) {
+    width: 150px;
+  }
+}
