@@ -6,6 +6,8 @@ import History from "./components/history/History";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import GameStatus from './components/gameStatus/GameStatus';
 
+let squares = document.querySelectorAll('.square');
+
 function App() {
     const [board, setBoard] = useState(Array(9).fill(null));
     const [xIsNext, setXIsNext] = useState(true);
@@ -13,7 +15,6 @@ function App() {
     const [gameStep, setStep] = useState(0)
     let winner = calcWinner(board);
 
-    let squares = document.querySelectorAll('.square');
     if (winner) colorWin(winner)
 
     function colorWin(winner) {

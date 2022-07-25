@@ -15,6 +15,6 @@ export function calcWinner(boardSquare) {
             return [boardSquare[a],win[i]];
         }
     }
-    if (boardSquare.every(elem => elem !== null)) return 'pat'
+    if (boardSquare.every(elem => elem !== null)) return 'draw'
     return null;
 }

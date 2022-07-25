@@ -1,13 +1,13 @@
 import React from 'react';
 
-const histStyle = {
+const historyStyle = {
     width: '250px',
     textAlign: 'center',
     cursor: 'pointer',
     listStyleType: 'none',
     paddingLeft: '0px'
 }
-const histStyleWrapper = {
+const historyStyleWrapper = {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -17,12 +17,16 @@ const histStyleWrapper = {
 
 const History = ({ history, onClick }) => {
     return (
-        <div style={histStyleWrapper}>
+        <div style={historyStyleWrapper}>
             <p>History of moves</p>
-            <ul style={histStyle}>
+            <ul style={historyStyle}>
                 {history.map((step, i) =>
                     <li id={i} key={i} onClick={() => onClick(i)}>
-                        {i + 1}. to {i > 0 ? `step ${i}` : `start`}
+                        {
+                            i===0
+                            ? `To start  =>`
+                            : `${i}. To step ${i}  =>`
+                        }
                     </li>
                 )}
             </ul>
