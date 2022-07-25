@@ -6,52 +6,50 @@ import History from "./components/history/History";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import GameStatus from './components/gameStatus/GameStatus';
 
-let squares = document.querySelectorAll('.square');
-
 function App() {
     const [board, setBoard] = useState(Array(9).fill(null));
     const [xIsNext, setXIsNext] = useState(true);
     const [history, setHistory] = useState([board]);
-    const [gameStep, setStep] = useState(0)
+    const [gameStep, setStep] = useState(0);
     let winner = calcWinner(board);
-
-    if (winner) colorWin(winner)
+    let squares = document.querySelectorAll('.square');
+    if (winner) colorWin(winner);
 
     function colorWin(winner) {
         squares.forEach((el, i) => {
             if (winner[1].includes(i)) el.classList.add('winSquare')
-        })
-    }
+        });
+    };
 
     function unColorWin() {
         squares.forEach((el) => {
             el.classList.remove('winSquare')
-        })
-    }
+        });
+    };
 
     function handleClick(i) {
-        setStep(gameStep+1)
+        setStep(gameStep+1);
         const boardCopy = [...board];
         if (winner || boardCopy[i]) return;
         boardCopy[i] = xIsNext ? 'X' : 'O';
         setXIsNext(!xIsNext);
         setBoard(boardCopy);
         setHistory([...(history.slice(0, gameStep+1)), boardCopy]);
-    }
+    };
 
     function historyClick(i) {
         setBoard(history[i]);
-        setStep(i)
-        setXIsNext(i%2===0)
+        setStep(i);
+        setXIsNext(i%2===0);
         unColorWin();
-    }
+    };
 
     let reset = () => {
         setXIsNext(true);
         setBoard(board.fill(null));
         setHistory([board]);
         unColorWin();
-    }
+    };
 
     return (
         <div className="App">
