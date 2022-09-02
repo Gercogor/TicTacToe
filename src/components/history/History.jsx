@@ -1,31 +1,18 @@
 import React from 'react';
-
-const historyStyle = {
-    width: '250px',
-    textAlign: 'center',
-    cursor: 'pointer',
-    listStyleType: 'none',
-    paddingLeft: '0px'
-}
-const historyStyleWrapper = {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    paddingTop: '10px'
-}
-
+import './History.scss'
+import Button from '../../UI/Button/Button';
 
 const History = ({ history, onClick }) => {
     return (
-        <div style={historyStyleWrapper}>
-            <p>History of moves</p>
-            <ul style={historyStyle}>
+        <div className='historyStyleWrapper'>
+            <p>Back to steps</p>
+            <ul className='historyStyle'>
                 {history.map((step, i) =>
-                    <li id={i} key={i} onClick={() => onClick(i)}>
+                    <li className='historyStep' id={i} key={i} onClick={() => onClick(i)}>
                         {
                             i===0
-                            ? `To start  =>`
-                            : `${i}. To step ${i}  =>`
+                            ? <Button>Back to start</Button>
+                            : <Button>Back to step {i}</Button>
                         }
                     </li>
                 )}

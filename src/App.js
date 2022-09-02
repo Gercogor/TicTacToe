@@ -3,8 +3,8 @@ import Board from "./components/board/Board";
 import React, { useState } from 'react';
 import { calcWinner } from "./components/winnerFunc/calcWinner";
 import History from "./components/history/History";
-import 'bootstrap/dist/css/bootstrap.min.css';
 import GameStatus from './components/gameStatus/GameStatus';
+import Button from './UI/Button/Button';
 
 function App() {
     const [board, setBoard] = useState(Array(9).fill(null));
@@ -13,7 +13,7 @@ function App() {
     const [gameStep, setStep] = useState(0);
     let winner = calcWinner(board);
     let squares = document.querySelectorAll('.square');
-    if (winner) colorWin(winner);
+    if (winner) winner==='draw'? colorDraw() :colorWin(winner);
 
     function colorWin(winner) {
         squares.forEach((el, i) => {
@@ -21,9 +21,16 @@ function App() {
         });
     };
 
-    function unColorWin() {
+    function colorDraw () {
+        squares.forEach((el) => {
+            el.classList.add('drawSquare')
+        });
+    }
+
+    function unColorSquares() {
         squares.forEach((el) => {
             el.classList.remove('winSquare')
+            el.classList.remove('drawSquare')
         });
     };
 
@@ -41,23 +48,26 @@ function App() {
         setBoard(history[i]);
         setStep(i);
         setXIsNext(i%2===0);
-        unColorWin();
+        unColorSquares();
     };
 
     let reset = () => {
         setXIsNext(true);
         setBoard(board.fill(null));
         setHistory([board]);
-        unColorWin();
+        unColorSquares();
+        setAnimated(true)
     };
 
+    const [animated, setAnimated] = useState(true)
+
     return (
-        <div className="App">
+        <div className={animated?'App fade':'App'} onAnimationEnd={()=>setAnimated(false)}>
             <GameStatus winner={winner} xIsNext={xIsNext} />
             <Board squares={board} onClick={handleClick} />
-            <button variant="link" onClick={reset}>
+            <Button onClick={reset} BgColor={'lightgray'} TextColor={'red'}>
                 Reset
-            </button> 
+            </Button> 
             <History history={history} onClick={historyClick} />
         </div>
     );

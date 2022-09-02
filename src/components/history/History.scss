@@ -1,0 +1,19 @@
+.historyStyleWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 10px;
+}
+
+.historyStyle {
+    width: 250px;
+    text-align: center;
+    cursor: pointer;
+    list-style-type: none;
+    padding-left: 0px;
+    margin-top: 0px;
+}
+
+.historyStep {
+    margin: 10px auto;
+}
